@@ -147,6 +147,11 @@
             <span id="passworderror"></span>
             <br>
 
+            <input type="radio" id="admin" name="admin" value="1">
+            <label for="admin">Admin</label><br>
+            <input type="radio" id="customer" name="customer" value="0">
+            <label for="customer">Customer</label><br>
+
             <input type="button" id="submitbutton" value="Submit Form">
         </form>
     </body>

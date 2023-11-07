@@ -3,6 +3,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Retrieve form values
     $adminusername = $_POST["username"];
     $adminpassword = $_POST["password"];
+    $isadmin = isset($_POST["admin"]) ? 1 : 0;
 
     $servername = "localhost";
     $username = "root";
@@ -28,10 +29,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $response = array("status" => "fail", "message" => "Already a user is present");
     } else {
         $stmt->close();
-        $insertSql = "INSERT INTO adminusers (username, password) VALUES (?, ?)";
+        $insertSql = "INSERT INTO adminusers (username, password, isadmin) VALUES (?, ?, ?)";
         $insertStmt = $conn->prepare($insertSql);
 
-        $insertStmt->bind_param("ss", $adminusername, $adminpassword);
+        $insertStmt->bind_param("ssi", $adminusername, $adminpassword, $isadmin);
 
         if ($insertStmt->execute()) {
             $insertStmt->close();
